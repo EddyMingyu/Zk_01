@@ -18,8 +18,6 @@ public abstract class Base_zk {
 	
 	final static int SESSIONTIMEOUT = 50*1000;
 	
-	ZooKeeper zoo =null;
-	
 	public abstract  ZooKeeper getZk() throws IOException;
 	
 	

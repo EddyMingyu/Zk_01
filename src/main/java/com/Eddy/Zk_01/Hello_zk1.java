@@ -24,6 +24,18 @@ public class Hello_zk1 extends Base_zk{
 	private static final Logger logger = Logger.getLogger(Hello_zk1.class);
 	
 	private final static String PATH ="/Eddy";
+	
+	private ZooKeeper zoo =null;
+	
+	
+
+	public ZooKeeper getZoo() {
+		return zoo;
+	}
+
+	public void setZoo(ZooKeeper zoo) {
+		this.zoo = zoo;
+	}
 
 	@Override
 	public ZooKeeper getZk() throws IOException {
@@ -42,12 +54,6 @@ public class Hello_zk1 extends Base_zk{
 
 	public String createZk(String data,CreateMode createMode) throws IOException, KeeperException, InterruptedException {
 
-		if(zoo == null){
-			
-			zoo = getZk();
-			
-		}
-		
 		String create = zoo.create(PATH, data.getBytes(),Ids.OPEN_ACL_UNSAFE, createMode);
 		
 		return create;
@@ -56,11 +62,6 @@ public class Hello_zk1 extends Base_zk{
 	
 	public Stat setZk(String data,Integer version) throws IOException, KeeperException, InterruptedException{
 		
-		if(zoo == null){
-			
-			zoo = getZk();
-			
-		}
 		
 		Stat setData = zoo.setData(PATH, data.getBytes(), version);
 		
@@ -70,12 +71,6 @@ public class Hello_zk1 extends Base_zk{
 	
 	public String getZk(Stat setData) throws IOException, KeeperException, InterruptedException{
 		
-		if(zoo == null){
-			
-			zoo = getZk();
-			
-		}
-		
 		byte[] data = zoo.getData(PATH,false,setData);
 		
 		String zk = new String(data);
@@ -84,12 +79,6 @@ public class Hello_zk1 extends Base_zk{
 	}
 	
 	public void deleteZk(Integer version) throws IOException, KeeperException, InterruptedException{
-		
-		if(zoo == null){
-			
-			zoo = getZk();
-			
-		}
 		
 		zoo.delete(PATH, version);
 		
@@ -112,6 +101,8 @@ public class Hello_zk1 extends Base_zk{
 		
 		ZooKeeper zk = a.getZk();
 		
+		a.setZoo(zk);
+		
 		Stat exists = zk.exists(PATH, false);
 		
 		if(exists == null){
@@ -119,6 +110,7 @@ public class Hello_zk1 extends Base_zk{
 			String createZk = a.createZk("test", CreateMode.PERSISTENT);
 			
 			logger.info("create new path**********"+createZk);
+			
 			
 		}else{
 			
