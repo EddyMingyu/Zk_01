@@ -14,7 +14,7 @@ import org.apache.zookeeper.ZooKeeper;
 */
 public abstract class Base_zk {
 
-	final static String CONNECTSTRING = "192.168.140.128:2181";
+	final static String CONNECTSTRING = "192.168.140.128:2192,192.168.140.128:2193,192.168.140.128:2191";
 	
 	final static int SESSIONTIMEOUT = 50*1000;
 	

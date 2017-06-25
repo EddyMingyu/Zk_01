@@ -115,7 +115,6 @@ public class Hello_zk1 extends Base_zk{
 		}else{
 			
 			logger.info("already haven it");
-			
 		}
 		
 		a.stopZk();
